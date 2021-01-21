@@ -54,5 +54,38 @@ const questions = [
         type: "input",
         name: "repo",
         message: "What is your repo link?"
+
+        validate: (input) => input.length > 5
     },
 ];
+//inquirer prompts
+inquirer
+    .prompt(questions)
+    .then(function(data){
+        const queryUrl = `https://api.github.com/users/${data.username}`;
+
+        axios.get(queryUrl).then(function(res) {
+            
+            const githubInfo = {
+                githubImage: res.data.avatar_url,
+                email: res.data.email,
+                profile: res.data.html_url,
+                name: res.data.name
+            };
+            
+          fs.writeFile("README.md", generate(data, githubInfo), function(err) {
+            if (err) {
+              throw err;
+            };
+    
+            console.log("New README file created with success!");
+          });
+        });
+
+});
+//function to write README
+function writeToFile(fileName, Data) {};
+//function to init app
+function init(){};
+//function call to init app
+init();
