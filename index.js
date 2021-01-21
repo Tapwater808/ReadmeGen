@@ -1,7 +1,6 @@
 //Requirements here
 const inquirer = require("inquirer");
-const fs = require('fs');
-const axios = require("axios");
+const writefile = require('fs')
 const generate = require('./utils/generateMarkdown');
 //Questions here
 const questions = [
@@ -55,37 +54,21 @@ const questions = [
         name: "repo",
         message: "What is your repo link?"
 
-        validate: (input) => input.length > 5
+       
+
     },
 ];
-//inquirer prompts
-inquirer
-    .prompt(questions)
-    .then(function(data){
-        const queryUrl = `https://api.github.com/users/${data.username}`;
-
-        axios.get(queryUrl).then(function(res) {
-            
-            const githubInfo = {
-                githubImage: res.data.avatar_url,
-                email: res.data.email,
-                profile: res.data.html_url,
-                name: res.data.name
-            };
-            
-          fs.writeFile("README.md", generate(data, githubInfo), function(err) {
-            if (err) {
-              throw err;
-            };
-    
-            console.log("New README file created with success!");
-          });
-        });
-
-});
-//function to write README
-function writeToFile(fileName, Data) {};
+// //function to write README
+function writeToFile(fileName, Data) {
+    writeFile(fileName, data, (err) => console.log ('error in write file',  err));
+};
 //function to init app
-function init(){};
+async function init() {
+    const answers = await inquirer.prompt(questions);
+    console.log('answers are:',  answers);
+    const markDown = generateMarkdown(answers);
+    console.log('generated markdown:', markDown);
+    writeToFile(answers.title + '_readme.md', markDown)
+}
 //function call to init app
-init();
+init()
