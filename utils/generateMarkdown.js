@@ -1,36 +1,10 @@
-function generateMarkdown(data, githubInfo) {
-    return `
-  # **${data.title}**
-  ${data.badge}
-  ## Description 
-  ${data.description}
-  ## Table of contents
-  - [Description](#Description)
-  - [Installation](#Installation)
-  - [Usage](#Usage)
-  - [Licence](#Licence)
-  - [Contributors](#Contributors)
-  - [Test](#Test)
-  - [Repository Link](#Repository)
-  - [GitHub Info](#GitHub) 
-  ## Installation
-          ${data.installation}
-  ## Usage
-  ${data.usage}
-  ## Licence
-  ${data.licence}
-  ## Contributors
-  ${data.contributing}
-  ## Test
-  ${data.test}
-  ## Repository
-  - [Project Repo](${data.repo})
-  ## GitHub
-  ![Image of me](${githubInfo.githubImage})
-  - ${githubInfo.name}
-  - [GitHub Profile](${githubInfo.profile})
-  - <${githubInfo.email}>
-  `;
-  }
-  
-  module.exports = generateMarkdown;
+function renderLicenseBadge(license){}
+function renderLicenselink(license){}
+function renderLicenseSection(license){}
+function generateMarkdown({title, repository, license}){
+    return `# ${title} /n
+    repository: ${repository} /n
+    license: ${renderLicenseSection(license)}
+    `;
+}
+module.exports = generateMarkdown

@@ -1,7 +1,7 @@
 //Requirements here
 const inquirer = require("inquirer");
 const writefile = require('fs')
-const generate = require('./utils/generateMarkdown');
+const generateMarkdown = require('./utils/generateMarkdown');
 //Questions here
 const questions = [
     {
