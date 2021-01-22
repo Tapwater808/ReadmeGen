@@ -59,8 +59,8 @@ const questions = [
     },
 ];
 // //function to write README
-function writeToFile(fileName, Data) {
-    writeFile(fileName, data, (err) => console.log ('error in write file',  err));
+function writeToFile(fileName, data) {
+    // writeFile(fileName, data, (err) => console.log ('error in write file',  err));
 };
 //function to init app
 async function init() {
@@ -68,7 +68,7 @@ async function init() {
     console.log('answers are:',  answers);
     const markDown = generateMarkdown(answers);
     console.log('generated markdown:', markDown);
-    writeToFile(answers.title + '_readme.md', markDown)
+    writeToFile(answers.title + '_readme.md', generateMarkdown)
 }
 //function call to init app
 init()
